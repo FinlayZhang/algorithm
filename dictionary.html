@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字典的实现</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// javascript实现字典
+		function Dictionary() {
+			this.dataStore = [];
+			this.add  = add;//新增元素
+			this.remove = remove;//删除元素
+			this.find = find;//找到一个元素
+			this.showAll = showAll;//将字典元素显示出来
+			this.count = count;//字典的元素个数
+			this.clear = clear;//清空字典
+		}
+
+		//新增元素
+		function add(key, value) {
+			this.dataStore[key] = value;
+		}
+
+		//删除元素
+		function remove(key) {
+			delete this.dataStore[key];
+		}
+
+		//找到一个元素
+		function find(key) {
+			return this.dataStore[key];
+		}
+
+		//将字典元素显示出来
+		function showAll() {
+			var str = "";
+			for(var key in this.dataStore) {
+				str += key + '->' + this.dataStore[key]; 
+			}
+			return str;
+		}
+
+		//字典的元素个数
+		function count() {
+			var n = 0;
+			for(var key in this.dataStore) {
+				++n;
+			}
+			return n;
+		}
+
+		//清空字典
+		function clear() {
+			for(var key in this.dataStore) {
+				delete this.dataStore[key];
+			}
+		}
+
+		//=========字典的实例化==========//
+		var d = new Dictionary();
+		console.log(d);
+		d.add("xiaohong", "20");
+		d.add("xiaoming", "22");
+		d.add("xiaoqiang", "24");
+		console.log(d.showAll());
+		console.log(d.count());
+	</script>
+</body>
+</html>

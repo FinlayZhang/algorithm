@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>集合的实现</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// javascript实现集合
+		function Set() {
+			this.dataStore = [];
+			this.add  = add;//新增元素
+			this.remove = remove;//删除元素
+			this.size = size;//集合的元素个数
+			this.union = union;//求并集
+			this.contains = contains;//判断一个集合中是否包含某个元素
+			this.intersect = intersect;//交集
+			this.subset = subset;//判断一个集合是否是另一个的子集
+			this.difference = difference;//求补集
+			this.show = show;//将集合元素显示出来
+		}
+
+		//新增元素
+		function add(data) {
+			if (this.dataStore.indexOf(data) < 0) {
+				this.dataStore.push(data);
+				return true;
+			} else {
+				return false;
+			}	
+		}
+
+		//删除元素
+		function remove(data) {
+			var pos = this.dataStore.indexOf(data);
+			if (pos > -1) {
+				this.dataStore.splice(pos,1);
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		//集合的元素个数
+		function size() {
+			return this.dataStore.length;
+		}
+
+		//将集合元素显示出来
+		function show() {
+			return "[" + this.dataStore + "]";
+		}
+
+		//判断一个集合中是否包含某个元素
+		function contains(data) {
+			if (this.dataStore.indexOf(data) > -1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		//求并集
+		function union(set) {
+			var tempSet = new Set();
+			for (var i = 0; i < this.dataStore.length; i++) {
+				tempSet.add(this.dataStore[i]);
+			}
+			for (var i = 0; i < set.dataStore.length; i++) {
+			 	if (!tempSet.contains(set.dataStore[i])) {
+			 		tempSet.add(set.dataStore[i]);
+			 	}
+			}
+			return tempSet;
+		}
+
+		//交集
+		function intersect(set) {
+			var tempSet = new Set();
+			for (var i = 0; i < this.dataStore.length; i++) {
+				if (set.contains(this.dataStore[i])) {
+					tempSet.add(this.dataStore[i]);
+				}
+			}
+			return tempSet;
+		}
+
+		//求补集
+		function difference(set) {
+			var tempSet = new Set();
+			for (var i = 0; i < this.dataStore.length; i++) {
+				if (!set.contains(this.dataStore[i])) {
+					tempSet.add(this.dataStore[i]);
+				}
+			}
+			return tempSet;
+		}
+
+		//判断一个集合是否是另一个的子集
+		function subset(set) {
+			if (this.size() > set.size()) {
+				return false;
+			} else {
+				for(var item in this.dataStore) {
+					if (!set.contains(item)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
+		//=========集合的实例化==========//
+		var s1 = new Set();
+		var s2 = new Set();
+		s1.add(1);
+		s1.add(2);
+		s2.add(2);
+		s2.add(3);
+		var s3 = s1.union(s2);
+		console.log(s3.show());
+	</script>
+</body>
+</html>

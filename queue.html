@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>队列的实现</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// javascript实现队列
+		function Queue() {
+			this.dataStore = [];// 保存队列内元素，初始化为一个空数组
+			this.enqueue = enqueue;//入队，就是在数组的末尾添加一个元素
+        			this.dequeue = dequeue;//出队，就是删除数组的第一个元素
+        			this.front = front;//取出数组的第一个元素
+        			this.back = back;//取出数组的最后一个元素
+        			this.toString = toString;//队列元素以字符串的形式输出
+        			this.empty = empty;//判断数组是否为空
+        			this.count = count;//返回数组中元素的个数
+		}
+
+		//入队，就是在数组的末尾添加一个元素
+		function enqueue(element) {
+			this.dataStore.push(element);
+		}
+
+		//出队，就是删除数组的第一个元素
+		function dequeue() {
+			return this.dataStore.shift();
+		}
+
+		//取出数组的第一个元素
+		function front() {
+			return this.dataStore[0];
+		}
+
+		//取出数组的最后一个元素
+		function back() {
+			return this.dataStore[this.dataStore.length-1];
+		}
+
+		//队列元素以字符串的形式输出
+		function toString() {
+			var str = "";
+			for (var i = 0; i < this.dataStore.length; i++) {
+				str += dataStore[i] + '-->';
+			}
+			return str;
+		}
+
+		//判断数组是否为空
+		function empty() {
+			if (this.dataStore.length === 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		//返回数组中元素的个数
+		function count(){
+		   	return this.dataStore.length;
+		}
+
+		//=========队列的实例化==========//
+		var q = new Queue();
+		q.enqueue('a');
+		q.enqueue('b');
+		q.enqueue('c');
+		q.enqueue('d');
+		q.enqueue('d');
+		console.log(q);
+		q.dequeue();
+		console.log(q);
+	</script>
+</body>
+</html>

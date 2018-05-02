@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>栈的实现</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// javascript实现栈
+		function Stack() {
+			this.dataStore = [];// 保存栈内元素，初始化为一个空数组
+			this.top = 0;// 栈顶位置，初始化为0
+			this.push = push;// 压栈、进站、入栈
+			this.pop = pop;// 出栈、退栈
+			this.peek = peek;// 查看栈顶的元素
+			this.clear = clear;// 清空栈
+			this.length = length;// 栈内存放元素的个数
+		}
+
+		// 压栈、进站、入栈
+		function push(element) {
+			this.dataStore[this.top++] = element;
+		}
+
+		// 出栈、退栈
+		function pop() {
+			return this.dataStore[--this.top];
+		}
+
+		// 查看栈顶的元素
+		function peek() {
+			return this.dataStore[this.top-1];
+		}
+
+		// 清空栈
+		function clear() {
+			this.top = 0;
+		}
+
+		// 栈内存放元素的个数
+		function length() {
+		 	return this.top;
+		 } 
+
+		 //=========栈的实例化==========//
+		 var s = new Stack();
+		 s.push('a');
+		 s.push('b');
+		 s.push('c');
+		 s.push('d');
+		 s.push('e');
+		 console.log(s);
+	</script>
+</body>
+</html>

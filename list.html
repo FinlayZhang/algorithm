@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表的实现</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// javascript实现列表
+		function List() {
+			this.dataStore = [];
+			this.listSize = 0;//列表个数
+			this.pos = 0;//列表的当前位置
+			this.length = length;// 返回列表中的元素个数
+			this.clear = clear;//清空列表中的所有元素
+			this.getElement = getElement;//返回当前位置的元素
+			this.insert = insert;//在现有的元素后插入新元素
+			this.remove = remove;//从列表中删除元素
+			this.append = append;//在列表的末尾添加新元素
+			this.find = find;//从列表中查找元素的位置
+			this.front = front;//将列表的当前位置移到第一个元素
+			this.end = end;//将列表的当前位置移到最后一个元素
+			this.prev = prev;//将当前位置前移一位
+			this.next = next;//将当前位置后移一位
+			this.currPos = currPos;//返回列表的当前位置
+			this.moveTo = moveTo;//将当前位置移到到指定位置
+			this.contains = contains;//从列表中查找元素是否存在
+		}
+
+		// 返回列表中的元素个数
+		function length() {
+			return this.listSize;
+		}
+
+		//清空列表中的所有元素
+		function clear() {
+			delete this.dataStore;
+			this.dataStore = [];
+			this.pos = 0;
+			return true;
+		}
+
+		//返回当前位置的元素
+		function getElement() {
+			return this.dataStore[this.pos];
+		}
+
+		//在列表的末尾添加新元素
+		function append(element) {
+			++this.listSize;
+			this.dataStore[this.listSize - 1] = element;
+		}
+
+		//在现有的元素后插入新元素
+		function insert(element, after) {
+			var index = this.find(after);	
+			if (index > -1) {
+				this.dataStore.splice(index + 1, 0 ,element);
+				this.listSize++;
+			} else {
+				this.append(element);
+			}
+		}
+
+		//从列表中删除元素
+		function remove(element) {
+			var index = this.find(element);
+			if (index > -1) {
+				this.dataStore.splice(index, 1);
+				this.listSize--;
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		//从列表中查找元素的位置
+		function find(element) {
+			for (var i = 0; i < this.listSize; i++) {
+				if (element === this.dataStore[i]) {
+					return i;
+				}
+			}
+			return -1;
+		}
+
+		//将列表的当前位置移到第一个元素
+		function front() {
+			this.pos = 0;
+		}
+
+		//将列表的当前位置移到最后一个元素
+		function end() {
+			this.pos = this.listSize - 1;
+		}
+
+		//将当前位置前移一位
+		function prev() {
+			if (this.pos > 0) {
+				this.pos--;
+			} else {
+				this.front();
+			}
+		}
+
+		//将当前位置后移一位
+		function next() {
+			if (this.pos < this.listSize - 1) {
+				this.pos++;
+			} else {
+				this.pos = this.end();
+			}
+		}
+
+		//返回列表的当前位置
+		function currPos() {
+			return this.pos;
+		}
+
+		//将当前位置移到到指定位置
+		function moveTo(position) {
+			if (position >= 0 && position <= this.listSize - 1) {
+        				this.pos = position;
+       				 return true;
+    			}
+    			return false;
+		}
+
+		//从列表中查找元素是否存在
+		function contains(element) {
+			var index = this.find(element);
+			if (index > -1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		//=========列表的实例化==========//
+		var l = new List();
+		l.append(1);
+		l.append(3);
+		l.append(6);
+		l.insert(4,3);
+		console.log(l);
+	</script>
+</body>
+</html>

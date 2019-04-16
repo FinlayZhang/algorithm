@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>散列的实现</title>
+</head>
+
+<body>
+    <script>
+        function HashTable() {
+            this.table = new Array(137);
+            this.simpleHash = simpleHash; // 简单的散列函数
+            this.betterHash = betterHash; // 优化后的的散列函数
+            this.showAll = showAll;
+            this.put = put;
+            this.get = get;
+            // this.bulidTable = bulidTable;
+        }
+
+        function simpleHash(data) {
+            var total = 0;
+            for (var i = 0; i < data.length; i++) {
+                total += data.charCodeAt(i);
+            }
+            console.log(data + '->total' + total);
+            return total % this.table.length;
+        }
+
+        function betterHash(data) {
+            var h = 31
+            var total = 0
+            for (var i = 0; i < data.length; i++) {
+                total += h * total + data.charCodeAt(i)
+            }
+            console.log(data + '->total' + total)
+            return total % this.table.length
+        }
+
+        function showAll() {
+            for (var i = 0; i < this.table.length; i++) {
+                if (this.table[i] !== undefined) {
+                    console.log('键值是->' + i + '值是' + this.table[i])
+                }
+            }
+        }
+
+        function put(data) {
+            var pos = this.betterHash(data);
+            this.table[pos] = data;
+        }
+
+        function get(data) {
+            return this.table[this.simpleHash(data)];
+        }
+
+        var ht = new HashTable()
+        ht.put('abc')
+        ht.put('china')
+        ht.put('bbb')
+        ht.put('ss')
+        ht.put('nicah')
+        ht.put('cba')
+        ht.showAll()
+    </script>
+</body>
+
+</html>
